@@ -7,7 +7,7 @@ let shortenerSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    name: String,
+    codUrl: String,
     date_create: {
         type: Date,
         default: Date.now
