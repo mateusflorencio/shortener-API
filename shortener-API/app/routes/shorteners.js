@@ -19,6 +19,7 @@ router.get("/", WithAuth, async (req, res) => {
     };
 });
 
+//redirect
 router.get("/:code", async (req, res) => {
     const {
         code
@@ -27,6 +28,8 @@ router.get("/:code", async (req, res) => {
         let url = await Short.findOne({
             codUrl: code
         });
+        url.click++;
+        await url.save();
         res.redirect(url.url)
     } catch (error) {
         res.sendStatus(500).json({
@@ -45,6 +48,7 @@ router.post("/new", WithAuth, async (req, res) => {
         let dateUrl = new Short({
             url: url,
             codUrl: urlshort,
+            click: 0,
             author: req.user._id
         });
         await dateUrl.save();

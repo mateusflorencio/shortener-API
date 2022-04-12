@@ -12,6 +12,9 @@ let shortenerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    click: {
+        type: Number
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
