@@ -1,9 +1,8 @@
 const {
-    dafault: mongoose
-} = require("mongoose");
+    default: mongoose
+} = require("mongoose")
 
-
-let shortenerSchema = ({
+let shortenerSchema = new mongoose.Schema({
     url: {
         type: String,
         require: true

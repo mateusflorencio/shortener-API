@@ -6,7 +6,8 @@ require("dotenv").config();
 require('./config/database')
 
 
-const usersRouter = require('./routes/users');
+const usersRouter = require('./app/routes/users');
+const shortenerRouter = require('./app/routes/shorteners');
 
 const app = express();
 app.use(logger('dev'));
@@ -20,7 +21,8 @@ app.use(cors());
 
 
 //routs
-app.use('/', usersRouter);
+app.use('/users', usersRouter);
+app.use("/shortener", shortenerRouter);
 
 
 module.exports = app;
