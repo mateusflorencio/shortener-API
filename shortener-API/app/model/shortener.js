@@ -1,6 +1,7 @@
 const {
     default: mongoose
 } = require("mongoose")
+const moment = require("moment");
 
 let shortenerSchema = new mongoose.Schema({
     url: {
@@ -9,8 +10,8 @@ let shortenerSchema = new mongoose.Schema({
     },
     codUrl: String,
     date_create: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: moment().format("DD/MM/YYYY")
     },
     click: {
         type: Number

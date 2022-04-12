@@ -19,25 +19,6 @@ router.get("/", WithAuth, async (req, res) => {
     };
 });
 
-//redirect
-router.get("/:code", async (req, res) => {
-    const {
-        code
-    } = req.params;
-    try {
-        let url = await Short.findOne({
-            codUrl: code
-        });
-        url.click++;
-        await url.save();
-        res.redirect(url.url)
-    } catch (error) {
-        res.sendStatus(500).json({
-            error: "not found"
-        })
-    }
-});
-
 router.post("/new", WithAuth, async (req, res) => {
     const {
         url
@@ -92,6 +73,31 @@ router.put(("/:codUrl"), WithAuth, async (req, res) => {
     } catch (error) {
         res.status(500).json({
             error: `"Problem to update ${error}`
+        });
+    };
+});
+
+router.delete(("/:codUrl"), WithAuth, async (req, res) => {
+    const {
+        codUrl
+    } = req.params;
+    try {
+        let shortener = await Short.findOne({
+            codUrl: codUrl
+        })
+        if (shortener) {
+            await shortener.delete();
+            res.status(204).json({
+                message: "ok"
+            })
+        } else {
+            res.status(404).json({
+                erro: "not found"
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            error: `"Problem to delete ${error}`
         });
     };
 });

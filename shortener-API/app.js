@@ -8,6 +8,7 @@ require('./config/database')
 
 const usersRouter = require('./app/routes/users');
 const shortenerRouter = require('./app/routes/shorteners');
+const homeRouter = require('./app/routes/home');
 
 const app = express();
 app.use(logger('dev'));
@@ -23,6 +24,7 @@ app.use(cors());
 //routs
 app.use('/users', usersRouter);
 app.use("/shortener", shortenerRouter);
+app.use("/", homeRouter);
 
 
 module.exports = app;
