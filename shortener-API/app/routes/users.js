@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../model/user")
+const Short = require("../model/shortener")
 const jwt = require("jsonwebtoken");
 const WithAuth = require("../middlewares/auth");
 
@@ -119,16 +120,23 @@ router.put("/", WithAuth, async (req, res) => {
 });
 
 router.delete("/", WithAuth, async (req, res) => {
-  const user = await User.findOne({
-    _id: req.user._id
-  });
+
+
   try {
+    const user = await User.findOne({
+      _id: req.user._id
+    });
+    await Short.deleteMany({
+      author: req.user._id
+    });
     await user.delete();
     res.json({
       message: "ok"
     }).status(204);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({
+      error: `error -> ${error}`
+    });
   }
 })
 
