@@ -5,7 +5,7 @@ const cors = require('cors');
 require("dotenv").config();
 require('./config/database')
 
-
+app.use(cors());
 const usersRouter = require('./app/routes/users');
 const shortenerRouter = require('./app/routes/shorteners');
 const homeRouter = require('./app/routes/home');
@@ -18,7 +18,6 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
 
 
 //routs
