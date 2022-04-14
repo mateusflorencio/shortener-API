@@ -121,7 +121,6 @@ router.put("/", WithAuth, async (req, res) => {
 
 router.delete("/", WithAuth, async (req, res) => {
 
-
   try {
     const user = await User.findOne({
       _id: req.user._id
