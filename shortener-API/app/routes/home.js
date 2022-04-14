@@ -21,4 +21,19 @@ router.get("/:code", async (req, res) => {
     }
 });
 
+router.get("/", async (req, res) => {
+
+    try {
+
+        res.status(200).json({
+            Api: "Start"
+        })
+    } catch (error) {
+        res.sendStatus(500).json({
+            error: "error in database"
+        })
+    }
+});
+
+
 module.exports = router;
