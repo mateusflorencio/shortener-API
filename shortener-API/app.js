@@ -5,12 +5,12 @@ const cors = require('cors');
 require("dotenv").config();
 require('./config/database')
 
-app.use(cors());
 const usersRouter = require('./app/routes/users');
 const shortenerRouter = require('./app/routes/shorteners');
 const homeRouter = require('./app/routes/home');
 
 const app = express();
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
